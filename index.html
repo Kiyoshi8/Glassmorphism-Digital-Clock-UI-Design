@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Glassmorphism Digital Clock UI Design</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <section>
+            <div class="clock">
+                <div class="container">
+                    <h2 id="hour">00</h2>
+                    <h2 class="dot">:</h2>
+                    <h2 id="minute">00</h2>
+                    <h2 class="dot">:</h2>
+                    <h2 id="seconds">00</h2>
+                    <span id="ampm">PM</span>
+                    <div class="content">
+                        <div class="right-col">
+                            <img src="audioplay1.1.png" id="icon">
+                        </div>                 
+                </div>
+                <audio id="mySong">
+                    <source src="时空中的绘旅人 原声带 06 _ For All Time OST 06 - 冰蝶之舞 Dance of the Frost Butterfly.mp3" type="audio/mpeg">
+                </audio>
+            <script>
+                var mySong = document.getElementById("mySong");
+                var icon = document.getElementById("icon");
+
+                icon.onclick = function(){
+                    if(mySong.paused){
+                        mySong.play();
+                        icon.src ="audiostop0.8.png";
+                    }else{
+                        mySong.pause();
+                        icon.src ="audioplay1.1.png";
+                    }
+                }
+            </script>
+            </div>
+        </section>
+        <script>
+            function clock(){
+
+                let hour = document.getElementById('hour');
+                let minute = document.getElementById('minute');
+                let seconds = document.getElementById('seconds');
+                let ampm = document.getElementById('ampm');
+
+                let h = new Date().getHours();
+                let m = new Date().getMinutes();
+                let s = new Date().getSeconds();
+                var am = 'AM';
+
+                // Convert 24 hour time to 12 hour format with AM PM Indicator
+                if ( h > 12){
+                    h = h - 12;
+                    var am = 'PM';
+                }
+
+                // Add 0 to the beginning of number if less than 10
+                h = ( h < 10) ? '0' + h : h;
+                m = ( m < 10) ? '0' + m : m;
+                s = ( s < 10) ? '0' + s : s;
+
+                hour.innerHTML = h;
+                minute.innerHTML = m;
+                seconds.innerHTML = s;
+
+
+            }
+
+            var interval = setInterval(clock, 1000);
+        </script>
+    </body>
+</html>
